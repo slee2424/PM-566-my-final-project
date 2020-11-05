@@ -20,8 +20,8 @@ opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   eval=TRUE,
-  echo = TRUE,
-  cache = FALSE,
+  echo = FALSE,
+  cache = TRUE,
   fig.width = 7, 
   fig.align = 'center',
   fig.asp = 0.618,
@@ -43,6 +43,8 @@ opts_chunk$set(
 
 ## Introduction {.tabset}
 This is my PM566 Final Project website.
+
+Below plots are for lab 12.
 
 ```{r load-data, echo=FALSE}
 source("process_COVID_data.R")
@@ -81,13 +83,13 @@ p2_scatter <- cv_states_today_scatter %>%
 
 ### Figure 1
 
-```{r echo=FALSE}
+```{r p1, echo=FALSE}
 p1_scatter
 ```
 
 ### Figure 2
 
-```{r echo=FALSE}
+```{r p2, echo=FALSE}
 p2_scatter
 ```
 
