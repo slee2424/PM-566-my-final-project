@@ -96,7 +96,7 @@ p2_scatter
 {-}
 
 
-## Assignment 6 Final Project Interactive Visualization {.tabset}
+## Assignment 5 Final Project Interactive Visualization {.tabset}
 
 ```{r}
 library(skimr)
