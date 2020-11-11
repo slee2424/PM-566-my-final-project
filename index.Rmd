@@ -79,7 +79,7 @@ p2_scatter <- cv_states_today_scatter %>%
 ```
 
 
-## Showcasing plots {.tabset}
+## Lab 12 Showcasing plots {.tabset}
 
 ### Figure 1
 
@@ -94,3 +94,170 @@ p2_scatter
 ```
 
 {-}
+
+
+## Assignment 6 Final Project Interactive Visualization {.tabset}
+
+```{r}
+library(skimr)
+library(olsrr)
+library(mfp)
+```
+
+#### Data description
+
+- Lipotoxicity: lipotoxicity is a metabolic syndrome that results from the accumulation of lipid intermediates in non-adipose tissue, leading to cellular dysfunction and death.
+
+- Glucose: blood glucose level is the concentration of glucose present in the blood.
+
+- BloodPressure: the pressure of the blood in the circulatory system.
+
+- SkinThickness: skin thickness is primarily determined by collagen content and is increased in insulin-dependent diabetes mellitus (IDDM).
+
+- Insulin: insulin is an anabolic hormone that promotes glucose uptake.
+
+- BMI: body mass index (BMI) is a person's weight in kilograms divided by the square of height in meters.
+
+- DiabetesPedigreeFunction: diabetes pedigree function provides “a synthesis of the diabetes mellitus history in relatives and the genetic relationship of those relatives to the subject.” It utilizes information from a person’s family history to predict how diabetes will affect that individual.
+
+- Age: age of the individual.
+
+- Outcome: diabetes diagnosis.
+
+
+#### Key question: Whether diabetes risk factors are associated with the outcome. Whether Diabetes Pedigree Function has significant association with outcome and other risk factors. 
+
+```{r}
+diabetes <- read_csv("data/diabetes.csv")
+```
+
+```{r}
+db <-
+  diabetes %>%
+  mutate(Lipotoxicity = replace(Lipotoxicity, Lipotoxicity==0, NA))%>%
+  mutate(Glucose = replace(Glucose, Glucose==0, NA)) %>%
+  mutate(BloodPressure = replace(BloodPressure, BloodPressure==0, NA)) %>%
+  mutate(SkinThickness = replace(SkinThickness, SkinThickness==0, NA)) %>%
+  mutate(Insulin = replace(Insulin, Insulin==0, NA)) %>%
+  mutate(BMI = replace(BMI, BMI==0, NA))
+  
+```
+
+```{r}
+db <- 
+  db %>%
+  rename(
+    lip = Lipotoxicity,
+    glu = Glucose,
+    bp = BloodPressure,
+    st = SkinThickness,
+    ins = Insulin,
+    bmi = BMI,
+    dpf = DiabetesPedigreeFunction,
+    age = Age,
+    outcome = Outcome
+    )
+```
+
+
+```{r}
+db$age_group <- ifelse(db$age < 30, "20-29", 
+                         ifelse(db$age >= 30 & db$age < 40, "30-39",
+                                ifelse(db$age >= 40 & db$age < 50, "40-49", "50+")))
+
+```
+
+#### Histogram of Diabetes outcome by age groups
+
+```{r}
+db <-
+  db %>%
+  mutate(outcome_f = factor(outcome))
+
+p0 <- 
+  db %>%
+  ggplot()+
+  geom_bar(mapping = aes(x = age_group, fill = outcome_f, stat="identity"))+
+  labs(title = "Diabetes outcome by age groups")
+
+ggplotly(p0)
+
+```
+
+#### Histogram of Diabetes Outcome by Diabetes Pedigree Function 
+
+```{r}
+p1 <- ggplot(db, aes(x=dpf, color=outcome_f, fill=outcome_f)) +
+  scale_fill_manual(values = c("skyblue", "pink")) +
+  scale_colour_manual(values = c("black", "black")) +
+  geom_histogram()
+ggplotly(p1)
+
+```
+
+#### Mean Values of Each Risk Factors by Outcome Group
+- Glucose Level and Insulin shows significant difference in mean values by outcome group.
+
+```{r}
+db_ot <- 
+  db %>% 
+  group_by(outcome)
+  
+db_table <-
+  db_ot %>%
+  summarise(
+    DiabetesPedigreeFunction=mean(dpf, na.rm = TRUE),
+    Lipotoxicity=mean(lip, na.rm = TRUE),
+    Glucose=mean(glu, na.rm = TRUE),
+    BloodPressur=mean(bp, na.rm = TRUE),
+    SkinThickness=mean(st, na.rm = TRUE),
+    Insulin=mean(ins, na.rm = TRUE),
+    BMI=mean(bmi, na.rm = TRUE),
+    Age=mean(age, na.rm = TRUE),
+    )
+
+knitr::kable(db_table, align= "c", digits = 4, caption = "Mean of each risk factors by outcome group")
+```
+
+#### Scatter Plot Graph - Glucose Level vs Diabetes Pedigree Function by outcome groups
+
+```{r}
+db_ot %>% 
+  plot_ly(x = ~dpf, y = ~glu, 
+          type = 'scatter', mode = 'markers', color = ~outcome_f,
+          marker = list(opacity=1.0),
+          hoverinfo = 'text',
+          text = ~paste( paste("Diabetes Outcome:", outcome_f, sep=""), paste(" Diabetes Pedigree Function: ", dpf, sep="") , paste(" Glucose Level: ", glu, sep=""), sep = "<br>")) %>%
+  layout(title = "Glucose Level vs Diabetes Pedigree Function by oucome",
+                  yaxis = list(title = "Glucose Level"), xaxis = list(title = "Diabetes Pedigree Function"),
+         hovermode = "compare")
+```
+
+#### Scatter Plot Graph - Insulin Level vs Diabetes Pedigree Function by outcome groups
+
+```{r}
+db_ot %>% 
+  plot_ly(x = ~dpf, y = ~ins, 
+          type = 'scatter', mode = 'markers', color = ~outcome_f,
+          marker = list(opacity=1.0),
+          hoverinfo = 'text',
+          text = ~paste( paste("Diabetes Outcome:", outcome_f, sep=""), paste(" Diabetes Pedigree Function: ", dpf, sep="") , paste(" Insulin Level: ", ins, sep=""), sep = "<br>")) %>%
+  layout(title = "Insulin Level vs Diabetes Pedigree Function by oucome",
+                  yaxis = list(title = "Insulin Level"), xaxis = list(title = "Diabetes Pedigree Function"),
+         hovermode = "compare")
+```
+
+#### Scatter Plot Trend - Glucose Level vs Diabetes Pedigree Function by outcome groups
+
+```{r}
+p_glu <- ggplot(db, aes(x=dpf, y=glu)) + geom_point() + geom_smooth () 
+ggplotly(p_glu)
+```
+
+#### Scatter Plot Trend - Insulin Level vs Diabetes Pedigree Function by outcome groups
+
+```{r}
+p_ins <- ggplot(db, aes(x=dpf, y=ins)) + geom_point() + geom_smooth () 
+ggplotly(p_ins)
+```
+
