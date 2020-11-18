@@ -147,6 +147,14 @@ ggplotly(p1)
 
 <br>
 
+```{r}
+p1_bar <- ggplot(db, aes(x=outcome_f, y=dpf, color=outcome_f, fill=outcome_f)) +
+  scale_fill_manual(values = c("skyblue", "pink")) +
+  scale_colour_manual(values = c("black", "black")) +
+  geom_boxplot()
+ggplotly(p1_bar)
+```
+
 ## Mean Values of Each Risk Factors by Outcome Group
 - Glucose Level and Insulin shows significant difference in mean values by outcome group.
 
@@ -172,6 +180,14 @@ knitr::kable(db_table, align= "c", digits = 4, caption = "Mean of each risk fact
 ```
 
 <br>
+
+```{r}
+lip_plot <- ggplot(db_ot, aes(x=outcome_f, y=lip, color=outcome_f, fill=outcome_f)) +
+  scale_fill_manual(values = c("skyblue", "pink")) +
+  scale_colour_manual(values = c("black", "black")) +
+  geom_boxplot()
+ggplotly(lip_plot)
+```
 
 ## Scatter Plot Graph {.tabset}
 
