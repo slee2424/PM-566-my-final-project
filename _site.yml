@@ -9,7 +9,7 @@ navbar:
       href: about.html
   right:
     - text: "PDF Report"
-    - href: final.pdf
+      href: final.pdf
 output:
   html_document:
     theme: cosmo
