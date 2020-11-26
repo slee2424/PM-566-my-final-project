@@ -12,7 +12,7 @@
 <meta name="author" content="Jun Lee" />
 
 
-<title>PM566 Final Project</title>
+<title>PM566 Final Project: Diabetes Prediction</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +26,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="site_libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
@@ -33,6 +35,15 @@
 <script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -351,7 +362,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">My Website</a>
+      <a class="navbar-brand" href="index.html">Final Project</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -361,15 +372,12 @@ div.tocify {
 <li>
   <a href="about.html">About</a>
 </li>
-<li>
-  <a href="Lab12.html">Lab 12</a>
-</li>
-<li>
-  <a href="assignment5.html">Assignment 5</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li class="dropdown-header">PDF Report</li>
+<li>
+  <a href="Final_project.pdf"></a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -379,7 +387,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">PM566 Final Project</h1>
+<h1 class="title toc-ignore">PM566 Final Project: Diabetes Prediction</h1>
 <h4 class="author">Jun Lee</h4>
 
 </div>
@@ -398,7 +406,7 @@ div.tocify {
 <h1>Introduction</h1>
 <p>Diabetes is a complex metabolic syndrome and its involvement in various diseases is manifold with varying manifestations and different clinical symptoms and prognosis. Although being probably the most important risk factor, diabetes is often considered an “accompanying comorbidity” for cardiac or peripheral artery disease, hypertension, or stroke. An interesting study demonstrated that the risk of sudden cardiac death is at least 2-times higher in patients who are diabetic compared with those who are nondiabetic, regardless of the extent of cardiac dysfunction or symptoms of heart failure. In contrast, the risk of nonsudden cardiac death was not signiﬁcantly different between the 2 groups.</p>
 <p>Analyzing diabetes is beneficial as it could help prevent tragedic illnesses such as sudden cardiac death, the leading cause of death in the United States. The object of this study is to find out if diabetes risk prediction is possible based on family history and genetic factors along with other risk factors.</p>
-<p>This study is focused on whether Diabetes Pedigree Function is truly associated with diabetes and if so, what risk factors have a significant relationship with it. The association between Diabetes Pedigree Function and disease status would reveal to what extent does the genetic factors affect diabetes. The dataset did not separate type 1 diabetes and type 2 diabetes. Regardless of the type of diabetes, however, the dataset has sufficient predictors to evaluate the hypothesis because both types of diabetes are caused by impaired glucose metabolism. Diabetes Pedigree Function, which is the key variable, can be assessed as family history is one of the important risk factors for both types of diabetes. In the analysis, important indicators of diabetes will be evaluated together.</p>
+<p>This study is focused on 1) whether Diabetes Pedigree Function is truly associated with diabetes and if so, what risk factors have a significant relationship with it. 2) Creating effective diabetes prediction model. The association between Diabetes Pedigree Function and disease status would reveal to what extent does the genetic factors affect diabetes. The dataset did not separate type 1 diabetes and type 2 diabetes. Regardless of the type of diabetes, however, the dataset has sufficient predictors to evaluate the hypothesis because both types of diabetes are caused by impaired glucose metabolism. Diabetes Pedigree Function, which is the key variable, can be assessed as family history is one of the important risk factors for both types of diabetes. In the analysis, important indicators of diabetes will be evaluated together.</p>
 <p><br></p>
 <div id="data-description" class="section level2">
 <h2>Data description</h2>
@@ -426,26 +434,19 @@ div.tocify {
 <p>Reference: P. Rodgers, Judith, 2020, “Diabetes Mellitus “Comorbidity” or an Important Risk Factor?", <a href="https://doi.org/10.7910/DVN/JAW6AX" class="uri">https://doi.org/10.7910/DVN/JAW6AX</a>, Harvard Dataverse, V2, UNF:6:QOwrJ53n2F5fMC+wb4ADVA== [fileUNF]</p>
 <p>Analysis through assessing various plots, tables and graphs was performed to identify association between Diabetes Pedigree Function and diabetes test outcome, including the examination of the effect of lipotoxicity, glucose level, blood pressure, skin thickness, insulin level, BMI, and age. The data was cleaned by replacing extreme values to ’NA’s, shortening variable names, and creating new factor variable for better analysis. Skim function from skimr package was used to explore data. Dim, head and tail, summary, and table functions were used to check detailed observations. Age was stratified into four age groups(20-29, 30-39, 40-49, and 50+) for better understanding of relationship with diabetes. Outcome was binomial variable(0, 1) and it was transformed into factor variable (Non-diabetic and Diabetic).</p>
 <p><br></p>
-<div id="exploratory-data-analysis" class="section level2">
-<h2>Exploratory Data Analysis</h2>
+<div id="data-cleaning" class="section level2">
+<h2>Data Cleaning</h2>
 <ul>
-<li><p>The total dataset includes 768 observations with 9 vaiables.</p></li>
-<li><p>Lipotoxicity is right skewed and ranged from 0 to 17 with mean of 3.85.</p></li>
-<li><p>Glucose level is not skewed to either side and ranged from 0 to 199 with mean of 121.</p></li>
-<li><p>Blood Pressure is also not skewed and ranged from 0 to 122 with mean of 69.1.</p></li>
-<li><p>Skin Thickness right skewed and ranged from 0 to 99.</p></li>
-<li><p>Insulin level is extremly right skewed and ranged from 0 to 846.</p></li>
-<li><p>BMI is fairly normally distributed and ranged from 0 to 67.1.</p></li>
-<li><p>Diabetes Pedigree Function is right skewed and ranged from 0.078 to 2.42.</p></li>
-<li><p>Age is right skewed and ranged from 21 to 81. Right skewed age data displays more than 50% of observations are in the age group of 20 to 29. This data is more focused on young population.</p></li>
-<li><p>Outcome has binary results with mean of 0.349 which means 34.9% of all observations have diabetes positive outcome.</p></li>
+<li><p>0 values in all risk factors are speculated as an absence of the specific test outcome because there were significant difference in values between all 0s and the next minimum values of each variable. All of them are edited to “NA”s.</p></li>
+<li><p>Variable names are renamed into lowercase letters with shorter length.</p></li>
+<li><p>Created age groups (20-29, 30-39, 40-49, 50+) to compare proportion of the diabetes by age groups.</p></li>
 </ul>
 <table>
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
-<td align="left">diabetes</td>
+<td align="left">db</td>
 </tr>
 <tr class="even">
 <td align="left">Number of rows</td>
@@ -453,7 +454,7 @@ div.tocify {
 </tr>
 <tr class="odd">
 <td align="left">Number of columns</td>
-<td align="left">9</td>
+<td align="left">10</td>
 </tr>
 <tr class="even">
 <td align="left">_______________________</td>
@@ -464,16 +465,47 @@ div.tocify {
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
 <td align="left">numeric</td>
 <td align="left">9</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">________________________</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Group variables</td>
 <td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">age_group</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
 </tr>
 </tbody>
 </table>
@@ -496,87 +528,87 @@ div.tocify {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Lipotoxicity</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.85</td>
-<td align="right">3.37</td>
-<td align="right">0.00</td>
+<td align="left">lip</td>
+<td align="right">111</td>
+<td align="right">0.86</td>
+<td align="right">4.49</td>
+<td align="right">3.22</td>
 <td align="right">1.00</td>
-<td align="right">3.00</td>
-<td align="right">6.00</td>
+<td align="right">2.00</td>
+<td align="right">4.00</td>
+<td align="right">7.00</td>
 <td align="right">17.00</td>
 <td align="left">▇▃▂▁▁</td>
 </tr>
 <tr class="even">
-<td align="left">Glucose</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">120.89</td>
-<td align="right">31.97</td>
-<td align="right">0.00</td>
+<td align="left">glu</td>
+<td align="right">5</td>
+<td align="right">0.99</td>
+<td align="right">121.69</td>
+<td align="right">30.54</td>
+<td align="right">44.00</td>
 <td align="right">99.00</td>
 <td align="right">117.00</td>
-<td align="right">140.25</td>
+<td align="right">141.00</td>
 <td align="right">199.00</td>
-<td align="left">▁▁▇▆▂</td>
+<td align="left">▁▇▇▃▂</td>
 </tr>
 <tr class="odd">
-<td align="left">BloodPressure</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">69.11</td>
-<td align="right">19.36</td>
-<td align="right">0.00</td>
-<td align="right">62.00</td>
+<td align="left">bp</td>
+<td align="right">35</td>
+<td align="right">0.95</td>
+<td align="right">72.41</td>
+<td align="right">12.38</td>
+<td align="right">24.00</td>
+<td align="right">64.00</td>
 <td align="right">72.00</td>
 <td align="right">80.00</td>
 <td align="right">122.00</td>
-<td align="left">▁▁▇▇▁</td>
-</tr>
-<tr class="even">
-<td align="left">SkinThickness</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">20.54</td>
-<td align="right">15.95</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">23.00</td>
-<td align="right">32.00</td>
-<td align="right">99.00</td>
-<td align="left">▇▇▂▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">Insulin</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">79.80</td>
-<td align="right">115.24</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">30.50</td>
-<td align="right">127.25</td>
-<td align="right">846.00</td>
-<td align="left">▇▁▁▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">BMI</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">31.99</td>
-<td align="right">7.88</td>
-<td align="right">0.00</td>
-<td align="right">27.30</td>
-<td align="right">32.00</td>
-<td align="right">36.60</td>
-<td align="right">67.10</td>
 <td align="left">▁▃▇▂▁</td>
 </tr>
+<tr class="even">
+<td align="left">st</td>
+<td align="right">227</td>
+<td align="right">0.70</td>
+<td align="right">29.15</td>
+<td align="right">10.48</td>
+<td align="right">7.00</td>
+<td align="right">22.00</td>
+<td align="right">29.00</td>
+<td align="right">36.00</td>
+<td align="right">99.00</td>
+<td align="left">▆▇▁▁▁</td>
+</tr>
 <tr class="odd">
-<td align="left">DiabetesPedigreeFunction</td>
+<td align="left">ins</td>
+<td align="right">374</td>
+<td align="right">0.51</td>
+<td align="right">155.55</td>
+<td align="right">118.78</td>
+<td align="right">14.00</td>
+<td align="right">76.25</td>
+<td align="right">125.00</td>
+<td align="right">190.00</td>
+<td align="right">846.00</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">bmi</td>
+<td align="right">11</td>
+<td align="right">0.99</td>
+<td align="right">32.46</td>
+<td align="right">6.92</td>
+<td align="right">18.20</td>
+<td align="right">27.50</td>
+<td align="right">32.30</td>
+<td align="right">36.60</td>
+<td align="right">67.10</td>
+<td align="left">▅▇▃▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">dpf</td>
 <td align="right">0</td>
-<td align="right">1</td>
+<td align="right">1.00</td>
 <td align="right">0.47</td>
 <td align="right">0.33</td>
 <td align="right">0.08</td>
@@ -587,9 +619,9 @@ div.tocify {
 <td align="left">▇▃▁▁▁</td>
 </tr>
 <tr class="even">
-<td align="left">Age</td>
+<td align="left">age</td>
 <td align="right">0</td>
-<td align="right">1</td>
+<td align="right">1.00</td>
 <td align="right">33.24</td>
 <td align="right">11.76</td>
 <td align="right">21.00</td>
@@ -600,9 +632,9 @@ div.tocify {
 <td align="left">▇▃▁▁▁</td>
 </tr>
 <tr class="odd">
-<td align="left">Outcome</td>
+<td align="left">outcome</td>
 <td align="right">0</td>
-<td align="right">1</td>
+<td align="right">1.00</td>
 <td align="right">0.35</td>
 <td align="right">0.48</td>
 <td align="right">0.00</td>
@@ -614,14 +646,6 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-</div>
-<div id="data-cleaning" class="section level2">
-<h2>Data Cleaning</h2>
-<ul>
-<li><p>0 values in all risk factors are speculated as an absence of the specific test outcome because there were significant difference in values between all 0s and the next minimum values of each variable. All of them are edited to “NA”s.</p></li>
-<li><p>Variable names are renamed into lowercase letters with shorter length.</p></li>
-<li><p>Created age groups (20-29, 30-39, 40-49, 50+) to compare proportion of the diabetes by age groups.</p></li>
-</ul>
 <p><br></p>
 </div>
 </div>
@@ -642,18 +666,18 @@ div.tocify {
 <li><p>All of the predictors are showing some differences in mean values by diabetes outcome, meaning that these predictors can be utilized for a prediction model.</p></li>
 <li><p>Diabetes test outcome: 0 (Non-diabetic), 1 (Diabetic).</p></li>
 </ul>
-<table>
+<table style="width:100%;">
 <caption>Mean of Each Risk Factors by Outcome Group</caption>
 <colgroup>
-<col width="7%" />
-<col width="22%" />
+<col width="8%" />
+<col width="23%" />
 <col width="12%" />
 <col width="8%" />
 <col width="12%" />
-<col width="12%" />
+<col width="13%" />
 <col width="8%" />
-<col width="7%" />
-<col width="7%" />
+<col width="6%" />
+<col width="6%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -671,25 +695,25 @@ div.tocify {
 <tbody>
 <tr class="odd">
 <td align="center">0</td>
-<td align="center">0.4297</td>
-<td align="center">3.8618</td>
-<td align="center">110.6439</td>
-<td align="center">70.8773</td>
-<td align="center">27.2355</td>
-<td align="center">130.2879</td>
-<td align="center">30.8597</td>
-<td align="center">31.1900</td>
+<td align="center">0.43</td>
+<td align="center">3.86</td>
+<td align="center">110.64</td>
+<td align="center">70.88</td>
+<td align="center">27.24</td>
+<td align="center">130.29</td>
+<td align="center">30.86</td>
+<td align="center">31.19</td>
 </tr>
 <tr class="even">
 <td align="center">1</td>
-<td align="center">0.5505</td>
-<td align="center">5.6696</td>
-<td align="center">142.3195</td>
-<td align="center">75.3214</td>
-<td align="center">33.0000</td>
-<td align="center">206.8462</td>
-<td align="center">35.4068</td>
-<td align="center">37.0672</td>
+<td align="center">0.55</td>
+<td align="center">5.67</td>
+<td align="center">142.32</td>
+<td align="center">75.32</td>
+<td align="center">33.00</td>
+<td align="center">206.85</td>
+<td align="center">35.41</td>
+<td align="center">37.07</td>
 </tr>
 </tbody>
 </table>
@@ -777,6 +801,62 @@ div.tocify {
 <script type="application/json" data-for="htmlwidget-738c816762fea72da9b9">{"x":{"visdat":{"3a8834762aa2":["function () ","plotlyVisDat"]},"cur_data":"3a8834762aa2","attrs":{"3a8834762aa2":{"x":{},"y":{},"mode":"markers","hoverinfo":"text","text":{},"color":{},"colors":"Set1","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"BMI vs Diabetes Pedigree Function by oucome","yaxis":{"domain":[0,1],"automargin":true,"title":"BMI"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Diabetes Pedigree Function"},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[0.627,0.672,2.288,0.248,0.158,0.537,0.398,0.587,0.484,0.551,0.254,0.529,0.451,0.263,0.254,0.205,0.257,0.851,0.665,0.503,1.39,0.721,1.893,0.344,0.467,0.254,0.27,0.258,0.855,0.867,0.583,0.27,0.227,0.153,0.277,0.325,1.222,0.247,0.199,0.543,0.588,0.539,0.22,0.759,0.278,0.496,0.403,0.741,0.361,1.114,0.356,0.272,1.189,0.137,0.337,0.817,0.743,0.722,0.18,0.542,0.719,0.319,0.956,0.745,0.615,1.321,0.64,0.361,0.383,0.578,0.395,0.678,0.905,0.15,0.605,0.151,0.355,0.431,0.26,0.742,0.514,1.224,0.261,1.072,0.805,0.652,0.645,0.238,0.479,0.586,0.686,0.831,0.402,1.318,1.213,0.926,0.543,1.353,0.761,0.226,0.933,0.24,1.136,0.296,0.334,0.165,0.259,0.808,0.757,1.224,0.613,0.337,0.412,0.839,0.422,0.209,0.326,1.391,0.875,0.433,1.127,0.345,0.129,0.197,0.254,0.731,0.692,0.127,0.282,0.343,0.893,0.331,0.346,0.302,0.962,0.569,0.875,0.583,0.52,0.368,0.234,2.137,0.528,0.238,0.66,0.239,0.452,0.34,0.803,0.196,0.241,0.161,0.286,0.135,0.376,1.191,0.702,0.534,0.258,0.554,0.219,0.516,0.264,0.328,0.233,0.205,0.435,0.955,0.38,2.42,0.51,0.542,0.212,1.001,0.183,0.711,0.344,0.63,0.365,1.144,0.163,0.727,0.314,0.297,0.268,0.771,0.652,0.302,0.968,0.661,0.549,0.825,0.423,1.034,0.121,0.502,0.203,0.693,0.575,0.371,0.687,0.129,1.154,0.925,0.402,0.682,0.088,0.692,0.212,1.258,0.593,0.787,0.557,1.282,0.141,0.732,0.465,0.871,0.178,0.447,0.455,0.26,0.24,1.292,1.394,0.165,0.637,0.245,0.235,0.141,0.328,0.23,0.127,0.364,0.536,0.335,0.257,0.439,0.128,0.268,0.565,0.905,0.148,0.674,0.441,0.826,0.97,0.378,0.349,0.323,0.259,0.646,0.293,0.785,0.734,0.358,0.408,0.178,1.182,0.222,0.443,1.057,0.258,0.278,0.403,0.349],"y":[33.6,23.3,43.1,31,30.5,38,30.1,25.8,30,45.8,29.6,34.6,39.8,29,36.6,31.1,39.4,31.6,32.9,38.2,37.1,45.4,42,39.1,33.7,37.7,32.9,32.8,32.5,32.9,43.4,43.2,48.8,37.1,23.8,49.7,39,37.4,33.3,34,30.5,31.2,34,53.2,33.3,55,34.5,27.9,29.7,33.3,34.5,32.4,34.3,47.9,50,40.9,31.6,29.9,30.8,35.4,32.7,67.1,39.1,35.9,30.1,32,27.9,31.6,30.4,52.3,39.4,22.9,34.8,30.9,37.5,37.7,35.5,42.6,34.2,41.8,35.8,29,37.8,34.6,31.6,37.2,44,46.2,43.6,35.9,44.1,30.8,25.6,27.1,30,27.6,33.6,33.3,30,32,36.3,27.5,45.6,26.5,37.9,30.4,27,45.6,36.6,43.3,40.5,28,36.6,32.3,31.6,52.9,25.5,30.5,32.9,26.6,35.9,30.5,23.5,31.6,27.4,26.8,35.1,45.5,43.3,31.2,34.2,39.9,41,30.4,33.3,39.9,36.5,31.2,38.5,27.6,32.8,38.4,39.2,48.3,32.3,43.3,32,45.7,32.9,34.3,34.9,32,35,32.9,28.9,25.9,42.4,34.6,35.7,38.5,26.4,42.9,37,34.1,35,42.4,34.3,30.5,29.7,59.4,33.6,28.9,33.6,37.6,30,33.7,35.5,44.2,42.3,28.9,25.1,39,36.5,29.7,31.6,30.3,34.2,32.9,36.4,39.4,32.4,34.9,34.5,43.6,33.8,41.3,34.3,42.9,34.7,42.1,28.7,34.9,33.3,46.8,34.4,32,36.8,35.2,28.4,40,32.9,38.2,36.1,28.2,32.4,27.4,31.2,40.9,29.5,23.4,37.8,28.3,38.7,34.2,42.9,37.6,37.9,33.7,32.5,27.5,30.9,24.8,36,49.6,32.3,46.1,42.3,38.5,30.4,29.9,27.6,35,32.8,38,41.2,33.9,33.8,35.6,29.3,28.4,28.4,44.5,39.5,42.3,32.7,49.3,36.4,24.3,31.2,43.3,32.4,36.5,36.3,35.5,44,30.1],"mode":"markers","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"text":["Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.627<br> BMI: 33.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.672<br> BMI: 23.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 2.288<br> BMI: 43.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.248<br> BMI: 31","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.158<br> BMI: 30.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.537<br> BMI: 38","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.398<br> BMI: 30.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.587<br> BMI: 25.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.484<br> BMI: 30","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.551<br> BMI: 45.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.254<br> BMI: 29.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.529<br> BMI: 34.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.451<br> BMI: 39.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.263<br> BMI: 29","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.254<br> BMI: 36.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.205<br> BMI: 31.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.257<br> BMI: 39.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.851<br> BMI: 31.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.665<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.503<br> BMI: 38.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.39<br> BMI: 37.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.721<br> BMI: 45.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.893<br> BMI: 42","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.344<br> BMI: 39.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.467<br> BMI: 33.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.254<br> BMI: 37.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.27<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.258<br> BMI: 32.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.855<br> BMI: 32.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.867<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.583<br> BMI: 43.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.27<br> BMI: 43.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.227<br> BMI: 48.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.153<br> BMI: 37.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.277<br> BMI: 23.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.325<br> BMI: 49.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.222<br> BMI: 39","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.247<br> BMI: 37.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.199<br> BMI: 33.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.543<br> BMI: 34","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.588<br> BMI: 30.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.539<br> BMI: 31.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.22<br> BMI: 34","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.759<br> BMI: 53.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.278<br> BMI: 33.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.496<br> BMI: 55","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.403<br> BMI: 34.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.741<br> BMI: 27.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.361<br> BMI: 29.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.114<br> BMI: 33.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.356<br> BMI: 34.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.272<br> BMI: 32.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.189<br> BMI: 34.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.137<br> BMI: 47.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.337<br> BMI: 50","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.817<br> BMI: 40.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.743<br> BMI: 31.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.722<br> BMI: 29.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.18<br> BMI: 30.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.542<br> BMI: 35.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.719<br> BMI: 32.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.319<br> BMI: 67.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.956<br> BMI: 39.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.745<br> BMI: 35.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.615<br> BMI: 30.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.321<br> BMI: 32","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.64<br> BMI: 27.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.361<br> BMI: 31.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.383<br> BMI: 30.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.578<br> BMI: 52.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.395<br> BMI: 39.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.678<br> BMI: 22.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.905<br> BMI: 34.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.15<br> BMI: 30.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.605<br> BMI: 37.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.151<br> BMI: 37.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.355<br> BMI: 35.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.431<br> BMI: 42.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.26<br> BMI: 34.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.742<br> BMI: 41.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.514<br> BMI: 35.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.224<br> BMI: 29","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.261<br> BMI: 37.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.072<br> BMI: 34.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.805<br> BMI: 31.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.652<br> BMI: 37.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.645<br> BMI: 44","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.238<br> BMI: 46.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.479<br> BMI: 43.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.586<br> BMI: 35.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.686<br> BMI: 44.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.831<br> BMI: 30.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.402<br> BMI: 25.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.318<br> BMI: 27.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.213<br> BMI: 30","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.926<br> BMI: 27.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.543<br> BMI: 33.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.353<br> BMI: 33.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.761<br> BMI: 30","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.226<br> BMI: 32","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.933<br> BMI: 36.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.24<br> BMI: 27.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.136<br> BMI: 45.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.296<br> BMI: 26.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.334<br> BMI: 37.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.165<br> BMI: 30.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.259<br> BMI: 27","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.808<br> BMI: 45.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.757<br> BMI: 36.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.224<br> BMI: 43.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.613<br> BMI: 40.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.337<br> BMI: 28","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.412<br> BMI: 36.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.839<br> BMI: 32.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.422<br> BMI: 31.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.209<br> BMI: 52.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.326<br> BMI: 25.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.391<br> BMI: 30.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.875<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.433<br> BMI: 26.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.127<br> BMI: 35.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.345<br> BMI: 30.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.129<br> BMI: 23.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.197<br> BMI: 31.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.254<br> BMI: 27.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.731<br> BMI: 26.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.692<br> BMI: 35.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.127<br> BMI: 45.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.282<br> BMI: 43.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.343<br> BMI: 31.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.893<br> BMI: 34.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.331<br> BMI: 39.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.346<br> BMI: 41","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.302<br> BMI: 30.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.962<br> BMI: 33.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.569<br> BMI: 39.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.875<br> BMI: 36.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.583<br> BMI: 31.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.52<br> BMI: 38.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.368<br> BMI: 27.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.234<br> BMI: 32.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 2.137<br> BMI: 38.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.528<br> BMI: 39.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.238<br> BMI: 48.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.66<br> BMI: 32.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.239<br> BMI: 43.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.452<br> BMI: 32","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.34<br> BMI: 45.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.803<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.196<br> BMI: 34.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.241<br> BMI: 34.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.161<br> BMI: 32","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.286<br> BMI: 35","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.135<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.376<br> BMI: 28.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.191<br> BMI: 25.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.702<br> BMI: 42.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.534<br> BMI: 34.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.258<br> BMI: 35.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.554<br> BMI: 38.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.219<br> BMI: 26.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.516<br> BMI: 42.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.264<br> BMI: 37","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.328<br> BMI: 34.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.233<br> BMI: 35","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.205<br> BMI: 42.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.435<br> BMI: 34.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.955<br> BMI: 30.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.38<br> BMI: 29.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 2.42<br> BMI: 59.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.51<br> BMI: 33.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.542<br> BMI: 28.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.212<br> BMI: 33.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.001<br> BMI: 37.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.183<br> BMI: 30","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.711<br> BMI: 33.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.344<br> BMI: 35.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.63<br> BMI: 44.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.365<br> BMI: 42.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.144<br> BMI: 28.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.163<br> BMI: 25.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.727<br> BMI: 39","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.314<br> BMI: 36.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.297<br> BMI: 29.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.268<br> BMI: 31.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.771<br> BMI: 30.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.652<br> BMI: 34.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.302<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.968<br> BMI: 36.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.661<br> BMI: 39.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.549<br> BMI: 32.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.825<br> BMI: 34.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.423<br> BMI: 34.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.034<br> BMI: 43.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.121<br> BMI: 33.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.502<br> BMI: 41.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.203<br> BMI: 34.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.693<br> BMI: 42.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.575<br> BMI: 34.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.371<br> BMI: 42.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.687<br> BMI: 28.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.129<br> BMI: 34.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.154<br> BMI: 33.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.925<br> BMI: 46.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.402<br> BMI: 34.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.682<br> BMI: 32","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.088<br> BMI: 36.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.692<br> BMI: 35.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.212<br> BMI: 28.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.258<br> BMI: 40","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.593<br> BMI: 32.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.787<br> BMI: 38.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.557<br> BMI: 36.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.282<br> BMI: 28.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.141<br> BMI: 32.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.732<br> BMI: 27.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.465<br> BMI: 31.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.871<br> BMI: 40.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.178<br> BMI: 29.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.447<br> BMI: 23.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.455<br> BMI: 37.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.26<br> BMI: 28.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.24<br> BMI: 38.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.292<br> BMI: 34.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.394<br> BMI: 42.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.165<br> BMI: 37.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.637<br> BMI: 37.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.245<br> BMI: 33.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.235<br> BMI: 32.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.141<br> BMI: 27.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.328<br> BMI: 30.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.23<br> BMI: 24.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.127<br> BMI: 36","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.364<br> BMI: 49.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.536<br> BMI: 32.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.335<br> BMI: 46.1","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.257<br> BMI: 42.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.439<br> BMI: 38.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.128<br> BMI: 30.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.268<br> BMI: 29.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.565<br> BMI: 27.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.905<br> BMI: 35","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.148<br> BMI: 32.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.674<br> BMI: 38","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.441<br> BMI: 41.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.826<br> BMI: 33.9","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.97<br> BMI: 33.8","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.378<br> BMI: 35.6","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.349<br> BMI: 29.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.323<br> BMI: 28.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.259<br> BMI: 28.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.646<br> BMI: 44.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.293<br> BMI: 39.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.785<br> BMI: 42.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.734<br> BMI: 32.7","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.358<br> BMI: 49.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.408<br> BMI: 36.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.178<br> BMI: 24.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.182<br> BMI: 31.2","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.222<br> BMI: 43.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.443<br> BMI: 32.4","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 1.057<br> BMI: 36.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.258<br> BMI: 36.3","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.278<br> BMI: 35.5","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.403<br> BMI: 44","Diabetes Outcome:Diabetic<br> Diabetes Pedigree Function: 0.349<br> BMI: 30.1"],"type":"scatter","name":"Diabetic","marker":{"color":"rgba(228,26,28,1)","line":{"color":"rgba(228,26,28,1)"}},"textfont":{"color":"rgba(228,26,28,1)"},"error_y":{"color":"rgba(228,26,28,1)"},"error_x":{"color":"rgba(228,26,28,1)"},"line":{"color":"rgba(228,26,28,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[0.351,0.167,0.201,0.134,0.191,1.441,0.183,0.704,0.388,0.487,0.245,0.337,0.546,0.267,0.188,0.512,0.966,0.42,0.271,0.696,0.235,0.294,0.564,0.586,0.491,0.526,0.342,0.718,0.248,0.962,1.781,0.173,0.587,0.699,0.203,0.845,0.334,0.189,0.411,0.231,0.396,0.14,0.391,0.37,0.307,0.14,0.767,0.237,0.698,0.178,0.324,0.165,0.258,0.443,0.261,0.761,0.255,0.13,0.323,0.356,0.179,0.262,0.283,0.93,0.801,0.207,0.287,0.336,0.192,0.391,0.654,0.443,0.223,0.26,0.404,0.186,0.452,0.261,0.457,0.647,0.088,0.597,0.532,0.703,0.159,0.268,0.286,0.318,0.237,0.096,1.4,0.218,0.085,0.399,0.432,0.687,0.637,0.833,0.229,0.294,0.204,0.167,0.368,0.256,0.709,0.471,0.495,0.773,0.678,0.37,0.382,0.19,0.084,0.725,0.299,0.268,0.244,0.142,0.374,0.136,0.187,0.874,0.236,0.787,0.235,0.324,0.407,0.289,0.29,0.375,0.164,0.464,0.209,0.687,0.666,0.101,0.198,2.329,0.089,0.583,0.394,0.293,0.582,0.192,0.446,0.329,0.258,0.427,0.282,0.143,0.38,0.284,0.249,0.238,0.557,0.092,0.655,0.299,0.612,0.2,0.997,1.101,0.078,0.128,0.254,0.422,0.251,0.677,0.454,0.744,0.881,0.28,0.262,0.647,0.619,0.34,0.263,0.434,0.254,0.692,0.52,0.84,0.156,0.207,0.215,0.143,0.313,0.605,0.626,0.315,0.284,0.15,0.527,0.148,0.123,0.2,0.122,1.476,0.166,0.137,0.26,0.259,0.932,0.472,0.673,0.389,0.29,0.485,0.349,0.654,0.187,0.279,0.237,0.252,0.243,0.58,0.559,0.378,0.207,0.305,0.385,0.499,0.252,0.306,0.545,0.225,0.816,0.299,0.509,1.021,0.821,0.236,0.947,1.268,0.221,0.205,0.949,0.444,0.389,0.463,1.6,0.944,0.389,0.151,0.28,0.52,0.336,0.674,0.528,1.076,0.256,1.095,0.624,0.507,0.561,0.496,0.421,0.284,0.108,0.551,0.527,0.167,1.138,0.244,0.434,0.147,0.727,0.497,0.23,0.658,0.33,0.285,0.415,0.381,0.832,0.498,0.687,0.364,0.46,0.733,0.416,0.705,0.258,1.022,0.452,0.269,0.6,0.571,0.607,0.17,0.259,0.21,0.126,0.231,0.466,0.162,0.419,0.197,0.306,0.233,0.536,1.159,0.294,0.551,0.629,0.292,0.145,0.304,0.292,0.547,0.839,0.313,0.267,0.738,0.238,0.263,0.692,0.968,0.409,0.207,0.2,0.525,0.154,0.304,0.18,0.582,0.187,0.305,0.151,0.444,0.299,0.107,0.493,0.66,0.717,0.686,0.917,0.501,1.251,0.197,0.735,0.804,0.159,0.365,0.16,0.341,0.68,0.204,0.591,0.247,0.422,0.471,0.161,0.218,0.237,0.126,0.3,0.401,0.497,0.601,0.748,0.412,0.085,0.338,0.27,0.268,0.43,0.198,0.892,0.28,0.813,0.245,0.206,0.259,0.19,0.417,0.249,0.342,0.175,1.699,0.733,0.194,0.559,0.407,0.4,0.19,0.1,0.514,0.482,0.27,0.138,0.292,0.878,0.207,0.157,0.257,0.246,1.698,1.461,0.347,0.158,0.362,0.206,0.393,0.144,0.148,0.238,0.343,0.115,0.167,0.153,0.649,0.149,0.695,0.303,0.61,0.73,0.134,0.133,0.234,0.466,0.269,0.455,0.142,0.155,1.162,0.19,0.182,0.217,0.43,0.164,0.631,0.551,0.285,0.88,0.587,0.263,0.614,0.332,0.366,0.591,0.314,0.181,0.828,0.856,0.886,0.191,0.253,0.598,0.904,0.483,0.304,0.118,0.177,0.176,0.295,0.439,0.352,0.121,0.595,0.415,0.317,0.289,0.251,0.265,0.236,0.496,0.433,0.326,0.141,0.426,0.56,0.284,0.515,0.6,0.453,0.4,0.219,1.174,0.488,1.096,0.261,0.223,0.391,0.197,0.766,0.142,0.171,0.34,0.245,0.315],"y":[26.6,28.1,25.6,35.3,37.6,27.1,43.3,39.3,35.4,23.2,22.2,34.1,36,24.8,19.9,27.6,24,33.2,34,40.2,22.7,27.4,29.7,28,19.4,24.2,24.4,34.7,23,46.8,40.5,41.5,25,25.4,29,42.7,19.6,28.9,28.6,35.1,32,24.7,32.6,37.7,25,22.4,29.3,24.6,32.4,36.6,38.5,26.5,19.1,32,46.7,24.7,33.9,31.6,20.4,28.7,26.1,22.5,26.6,39.6,28.7,22.4,29.5,34.3,31.2,34,33.7,28.2,23.2,34.2,33.6,26.8,42.9,33.3,38.3,21.1,33.8,30.8,28.7,31.2,36.9,21.1,39.5,32.5,32.8,32.8,30.5,33.7,27.3,37.4,21.9,40.6,24.6,25.2,29,29.7,37.2,44.2,29.7,32.5,29.6,31.9,28.4,28.9,43.5,29.7,31.2,45,23.2,34.9,27.7,26.8,27.6,22.6,33.1,24.4,24.3,31,40.1,27.3,20.4,37.7,23.9,33.2,27.7,42.8,34.2,30,25.2,28.8,23.6,34.6,35.7,36.7,45.2,25.4,35,29.7,18.4,29.2,33.1,38.2,31.2,52.3,35.4,30.1,31.2,28,24.4,35.8,30.1,28.7,25.9,30.9,32.1,32.4,33.6,40,25.1,25.2,23,33.2,34.2,40.5,27.8,24.9,25.3,35.9,32.4,26,38.7,20.8,36.1,36.9,21.9,35.5,30.7,23.6,35.8,21,39.7,24.8,26.2,39.4,29.5,34.1,19.3,38.1,27.5,35.7,25.6,35.1,30.8,23.1,32.7,23.6,23.9,47.9,33.8,25.9,25.9,32,34.7,36.8,38.5,28.7,23.5,21.8,42.2,31.2,34.4,27.2,42.7,35.3,29.8,39.2,34.9,34,21,27.5,35.8,34.9,36.2,25.2,37.2,43.4,30.8,20,25.4,25.1,24.3,22.3,31.6,32,23.7,22.1,27.7,24.7,21.1,24.2,31.6,42.1,21.9,35.7,34.4,42.4,26.2,27.2,18.2,45.3,26,40.6,30.8,40.6,22.2,30.4,30,25.6,24.5,37.4,29.9,18.2,36.8,32.2,33.2,25.3,36.5,30.5,21.2,39.9,19.6,37.8,26.7,30.2,25.9,20.8,21.8,35.3,27.6,24,21.8,27.8,36.8,46.1,41.3,33.2,38.8,29.9,28.9,27.3,23.8,25.9,28,35.2,27.8,38.2,40.7,46.5,25.6,26.1,36.8,33.5,32.8,26.6,26,30.1,29.3,25.2,37.2,33.3,37.3,33.3,28.6,30.4,25,22.1,24.2,27.3,25.6,37.6,32.8,19.6,25,33.2,31.6,21.8,18.2,26.3,30.8,24.6,29.8,45.3,41.3,29.8,33.3,29.6,21.7,36.3,39.5,32,33.1,32.8,28.5,27.4,31.9,27.8,29.9,36.9,25.5,38.1,27.8,46.2,30.1,37.6,26.9,32.4,26.1,38.6,32,31.3,32.5,22.6,29.5,34.7,30.1,35.5,24,27,25,26.5,38.7,22.5,24.3,21.1,39.4,28.5,33.6,45.3,27.8,23.1,27.1,23.7,27.8,35.8,19.5,41.5,24,30.9,32.5,25.8,28.7,20.1,38.4,24.2,40.8,43.5,30.8,37.7,24.7,32.4,34.6,24.7,34.5,26.2,27.5,25.9,28.8,31.6,19.5,29.3,34.3,28,27.6,39.4,26.4,25.2,33.8,34.1,26.8,34.2,21.8,38.9,39,27.7,34.8,34,30.9,33.6,25.4,35.5,57.3,35.6,35.3,24.2,24.2,44.6,33.2,23.1,28.3,24.1,24.6,39.1,23.5,25,34.5,44.5,35.9,38.5,28.4,39.8,34.4,31.2,29.6,26.4,29.5,23.1,35.5,29.3,38.1,39.1,32.8,39.4,36.1,32.4,22.9,30.1,29,23.3,35.4,27.4,32,36.6,30.8,28.5,40.6,30,46.3,39,26,32,37.5,28.4,22.5,32.9,36.8,26.2,30.4],"mode":"markers","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"text":["Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.351<br> BMI: 26.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.167<br> BMI: 28.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.201<br> BMI: 25.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.134<br> BMI: 35.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.191<br> BMI: 37.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.441<br> BMI: 27.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.183<br> BMI: 43.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.704<br> BMI: 39.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.388<br> BMI: 35.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.487<br> BMI: 23.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.245<br> BMI: 22.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.337<br> BMI: 34.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.546<br> BMI: 36","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.267<br> BMI: 24.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.188<br> BMI: 19.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.512<br> BMI: 27.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.966<br> BMI: 24","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.42<br> BMI: 33.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.271<br> BMI: 34","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.696<br> BMI: 40.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.235<br> BMI: 22.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.294<br> BMI: 27.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.564<br> BMI: 29.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.586<br> BMI: 28","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.491<br> BMI: 19.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.526<br> BMI: 24.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.342<br> BMI: 24.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.718<br> BMI: 34.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.248<br> BMI: 23","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.962<br> BMI: 46.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.781<br> BMI: 40.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.173<br> BMI: 41.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.587<br> BMI: 25","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.699<br> BMI: 25.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.203<br> BMI: 29","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.845<br> BMI: 42.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.334<br> BMI: 19.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.189<br> BMI: 28.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.411<br> BMI: 28.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.231<br> BMI: 35.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.396<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.14<br> BMI: 24.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.391<br> BMI: 32.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.37<br> BMI: 37.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.307<br> BMI: 25","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.14<br> BMI: 22.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.767<br> BMI: 29.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.237<br> BMI: 24.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.698<br> BMI: 32.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.178<br> BMI: 36.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.324<br> BMI: 38.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.165<br> BMI: 26.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.258<br> BMI: 19.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.443<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.261<br> BMI: 46.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.761<br> BMI: 24.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.255<br> BMI: 33.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.13<br> BMI: 31.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.323<br> BMI: 20.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.356<br> BMI: 28.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.179<br> BMI: 26.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.262<br> BMI: 22.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.283<br> BMI: 26.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.93<br> BMI: 39.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.801<br> BMI: 28.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.207<br> BMI: 22.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.287<br> BMI: 29.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.336<br> BMI: 34.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.192<br> BMI: 31.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.391<br> BMI: 34","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.654<br> BMI: 33.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.443<br> BMI: 28.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.223<br> BMI: 23.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.26<br> BMI: 34.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.404<br> BMI: 33.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.186<br> BMI: 26.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.452<br> BMI: 42.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.261<br> BMI: 33.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.457<br> BMI: 38.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.647<br> BMI: 21.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.088<br> BMI: 33.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.597<br> BMI: 30.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.532<br> BMI: 28.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.703<br> BMI: 31.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.159<br> BMI: 36.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.268<br> BMI: 21.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.286<br> BMI: 39.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.318<br> BMI: 32.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.237<br> BMI: 32.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.096<br> BMI: 32.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.4<br> BMI: 30.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.218<br> BMI: 33.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.085<br> BMI: 27.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.399<br> BMI: 37.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.432<br> BMI: 21.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.687<br> BMI: 40.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.637<br> BMI: 24.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.833<br> BMI: 25.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.229<br> BMI: 29","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.294<br> BMI: 29.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.204<br> BMI: 37.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.167<br> BMI: 44.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.368<br> BMI: 29.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.256<br> BMI: 32.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.709<br> BMI: 29.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.471<br> BMI: 31.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.495<br> BMI: 28.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.773<br> BMI: 28.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.678<br> BMI: 43.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.37<br> BMI: 29.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.382<br> BMI: 31.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.19<br> BMI: 45","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.084<br> BMI: 23.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.725<br> BMI: 34.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.299<br> BMI: 27.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.268<br> BMI: 26.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.244<br> BMI: 27.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.142<br> BMI: 22.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.374<br> BMI: 33.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.136<br> BMI: 24.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.187<br> BMI: 24.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.874<br> BMI: 31","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.236<br> BMI: 40.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.787<br> BMI: 27.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.235<br> BMI: 20.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.324<br> BMI: 37.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.407<br> BMI: 23.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.289<br> BMI: 33.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.29<br> BMI: 27.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.375<br> BMI: 42.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.164<br> BMI: 34.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.464<br> BMI: 30","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.209<br> BMI: 25.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.687<br> BMI: 28.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.666<br> BMI: 23.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.101<br> BMI: 34.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.198<br> BMI: 35.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 2.329<br> BMI: 36.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.089<br> BMI: 45.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.583<br> BMI: 25.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.394<br> BMI: 35","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.293<br> BMI: 29.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.582<br> BMI: 18.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.192<br> BMI: 29.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.446<br> BMI: 33.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.329<br> BMI: 38.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.258<br> BMI: 31.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.427<br> BMI: 52.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.282<br> BMI: 35.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.143<br> BMI: 30.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.38<br> BMI: 31.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.284<br> BMI: 28","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.249<br> BMI: 24.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.238<br> BMI: 35.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.557<br> BMI: 30.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.092<br> BMI: 28.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.655<br> BMI: 25.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.299<br> BMI: 30.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.612<br> BMI: 32.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.2<br> BMI: 32.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.997<br> BMI: 33.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.101<br> BMI: 40","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.078<br> BMI: 25.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.128<br> BMI: 25.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.254<br> BMI: 23","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.422<br> BMI: 33.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.251<br> BMI: 34.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.677<br> BMI: 40.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.454<br> BMI: 27.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.744<br> BMI: 24.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.881<br> BMI: 25.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.28<br> BMI: 35.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.262<br> BMI: 32.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.647<br> BMI: 26","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.619<br> BMI: 38.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.34<br> BMI: 20.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.263<br> BMI: 36.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.434<br> BMI: 36.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.254<br> BMI: 21.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.692<br> BMI: 35.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.52<br> BMI: 30.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.84<br> BMI: 23.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.156<br> BMI: 35.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.207<br> BMI: 21","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.215<br> BMI: 39.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.143<br> BMI: 24.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.313<br> BMI: 26.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.605<br> BMI: 39.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.626<br> BMI: 29.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.315<br> BMI: 34.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.284<br> BMI: 19.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.15<br> BMI: 38.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.527<br> BMI: 27.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.148<br> BMI: 35.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.123<br> BMI: 25.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.2<br> BMI: 35.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.122<br> BMI: 30.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.476<br> BMI: 23.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.166<br> BMI: 32.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.137<br> BMI: 23.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.26<br> BMI: 23.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.259<br> BMI: 47.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.932<br> BMI: 33.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.472<br> BMI: 25.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.673<br> BMI: 25.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.389<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.29<br> BMI: 34.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.485<br> BMI: 36.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.349<br> BMI: 38.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.654<br> BMI: 28.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.187<br> BMI: 23.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.279<br> BMI: 21.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.237<br> BMI: 42.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.252<br> BMI: 31.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.243<br> BMI: 34.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.58<br> BMI: 27.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.559<br> BMI: 42.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.378<br> BMI: 35.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.207<br> BMI: 29.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.305<br> BMI: 39.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.385<br> BMI: 34.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.499<br> BMI: 34","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.252<br> BMI: 21","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.306<br> BMI: 27.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.545<br> BMI: 35.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.225<br> BMI: 34.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.816<br> BMI: 36.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.299<br> BMI: 25.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.509<br> BMI: 37.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.021<br> BMI: 43.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.821<br> BMI: 30.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.236<br> BMI: 20","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.947<br> BMI: 25.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.268<br> BMI: 25.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.221<br> BMI: 24.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.205<br> BMI: 22.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.949<br> BMI: 31.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.444<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.389<br> BMI: 23.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.463<br> BMI: 22.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.6<br> BMI: 27.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.944<br> BMI: 24.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.389<br> BMI: 21.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.151<br> BMI: 24.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.28<br> BMI: 31.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.52<br> BMI: 42.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.336<br> BMI: 21.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.674<br> BMI: 35.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.528<br> BMI: 34.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.076<br> BMI: 42.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.256<br> BMI: 26.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.095<br> BMI: 27.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.624<br> BMI: 18.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.507<br> BMI: 45.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.561<br> BMI: 26","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.496<br> BMI: 40.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.421<br> BMI: 30.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.284<br> BMI: 40.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.108<br> BMI: 22.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.551<br> BMI: 30.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.527<br> BMI: 30","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.167<br> BMI: 25.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.138<br> BMI: 24.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.244<br> BMI: 37.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.434<br> BMI: 29.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.147<br> BMI: 18.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.727<br> BMI: 36.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.497<br> BMI: 32.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.23<br> BMI: 33.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.658<br> BMI: 25.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.33<br> BMI: 36.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.285<br> BMI: 30.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.415<br> BMI: 21.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.381<br> BMI: 39.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.832<br> BMI: 19.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.498<br> BMI: 37.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.687<br> BMI: 26.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.364<br> BMI: 30.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.46<br> BMI: 25.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.733<br> BMI: 20.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.416<br> BMI: 21.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.705<br> BMI: 35.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.258<br> BMI: 27.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.022<br> BMI: 24","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.452<br> BMI: 21.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.269<br> BMI: 27.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.6<br> BMI: 36.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.571<br> BMI: 46.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.607<br> BMI: 41.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.17<br> BMI: 33.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.259<br> BMI: 38.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.21<br> BMI: 29.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.126<br> BMI: 28.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.231<br> BMI: 27.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.466<br> BMI: 23.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.162<br> BMI: 25.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.419<br> BMI: 28","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.197<br> BMI: 35.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.306<br> BMI: 27.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.233<br> BMI: 38.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.536<br> BMI: 40.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.159<br> BMI: 46.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.294<br> BMI: 25.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.551<br> BMI: 26.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.629<br> BMI: 36.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.292<br> BMI: 33.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.145<br> BMI: 32.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.304<br> BMI: 26.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.292<br> BMI: 26","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.547<br> BMI: 30.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.839<br> BMI: 29.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.313<br> BMI: 25.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.267<br> BMI: 37.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.738<br> BMI: 33.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.238<br> BMI: 37.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.263<br> BMI: 33.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.692<br> BMI: 28.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.968<br> BMI: 30.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.409<br> BMI: 25","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.207<br> BMI: 22.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.2<br> BMI: 24.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.525<br> BMI: 27.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.154<br> BMI: 25.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.304<br> BMI: 37.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.18<br> BMI: 32.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.582<br> BMI: 19.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.187<br> BMI: 25","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.305<br> BMI: 33.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.151<br> BMI: 31.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.444<br> BMI: 21.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.299<br> BMI: 18.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.107<br> BMI: 26.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.493<br> BMI: 30.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.66<br> BMI: 24.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.717<br> BMI: 29.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.686<br> BMI: 45.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.917<br> BMI: 41.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.501<br> BMI: 29.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.251<br> BMI: 33.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.197<br> BMI: 29.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.735<br> BMI: 21.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.804<br> BMI: 36.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.159<br> BMI: 39.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.365<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.16<br> BMI: 33.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.341<br> BMI: 32.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.68<br> BMI: 28.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.204<br> BMI: 27.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.591<br> BMI: 31.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.247<br> BMI: 27.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.422<br> BMI: 29.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.471<br> BMI: 36.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.161<br> BMI: 25.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.218<br> BMI: 38.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.237<br> BMI: 27.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.126<br> BMI: 46.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.3<br> BMI: 30.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.401<br> BMI: 37.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.497<br> BMI: 26.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.601<br> BMI: 32.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.748<br> BMI: 26.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.412<br> BMI: 38.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.085<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.338<br> BMI: 31.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.27<br> BMI: 32.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.268<br> BMI: 22.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.43<br> BMI: 29.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.198<br> BMI: 34.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.892<br> BMI: 30.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.28<br> BMI: 35.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.813<br> BMI: 24","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.245<br> BMI: 27","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.206<br> BMI: 25","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.259<br> BMI: 26.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.19<br> BMI: 38.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.417<br> BMI: 22.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.249<br> BMI: 24.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.342<br> BMI: 21.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.175<br> BMI: 39.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.699<br> BMI: 28.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.733<br> BMI: 33.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.194<br> BMI: 45.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.559<br> BMI: 27.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.407<br> BMI: 23.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.4<br> BMI: 27.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.19<br> BMI: 23.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.1<br> BMI: 27.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.514<br> BMI: 35.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.482<br> BMI: 19.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.27<br> BMI: 41.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.138<br> BMI: 24","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.292<br> BMI: 30.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.878<br> BMI: 32.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.207<br> BMI: 25.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.157<br> BMI: 28.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.257<br> BMI: 20.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.246<br> BMI: 38.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.698<br> BMI: 24.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.461<br> BMI: 40.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.347<br> BMI: 43.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.158<br> BMI: 30.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.362<br> BMI: 37.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.206<br> BMI: 24.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.393<br> BMI: 32.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.144<br> BMI: 34.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.148<br> BMI: 24.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.238<br> BMI: 34.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.343<br> BMI: 26.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.115<br> BMI: 27.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.167<br> BMI: 25.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.153<br> BMI: 28.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.649<br> BMI: 31.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.149<br> BMI: 19.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.695<br> BMI: 29.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.303<br> BMI: 34.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.61<br> BMI: 28","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.73<br> BMI: 27.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.134<br> BMI: 39.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.133<br> BMI: 26.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.234<br> BMI: 25.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.466<br> BMI: 33.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.269<br> BMI: 34.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.455<br> BMI: 26.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.142<br> BMI: 34.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.155<br> BMI: 21.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.162<br> BMI: 38.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.19<br> BMI: 39","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.182<br> BMI: 27.7","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.217<br> BMI: 34.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.43<br> BMI: 34","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.164<br> BMI: 30.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.631<br> BMI: 33.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.551<br> BMI: 25.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.285<br> BMI: 35.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.88<br> BMI: 57.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.587<br> BMI: 35.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.263<br> BMI: 35.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.614<br> BMI: 24.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.332<br> BMI: 24.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.366<br> BMI: 44.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.591<br> BMI: 33.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.314<br> BMI: 23.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.181<br> BMI: 28.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.828<br> BMI: 24.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.856<br> BMI: 24.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.886<br> BMI: 39.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.191<br> BMI: 23.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.253<br> BMI: 25","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.598<br> BMI: 34.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.904<br> BMI: 44.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.483<br> BMI: 35.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.304<br> BMI: 38.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.118<br> BMI: 28.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.177<br> BMI: 39.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.176<br> BMI: 34.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.295<br> BMI: 31.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.439<br> BMI: 29.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.352<br> BMI: 26.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.121<br> BMI: 29.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.595<br> BMI: 23.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.415<br> BMI: 35.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.317<br> BMI: 29.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.289<br> BMI: 38.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.251<br> BMI: 39.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.265<br> BMI: 32.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.236<br> BMI: 39.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.496<br> BMI: 36.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.433<br> BMI: 32.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.326<br> BMI: 22.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.141<br> BMI: 30.1","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.426<br> BMI: 29","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.56<br> BMI: 23.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.284<br> BMI: 35.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.515<br> BMI: 27.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.6<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.453<br> BMI: 36.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.4<br> BMI: 30.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.219<br> BMI: 28.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.174<br> BMI: 40.6","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.488<br> BMI: 30","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 1.096<br> BMI: 46.3","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.261<br> BMI: 39","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.223<br> BMI: 26","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.391<br> BMI: 32","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.197<br> BMI: 37.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.766<br> BMI: 28.4","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.142<br> BMI: 22.5","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.171<br> BMI: 32.9","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.34<br> BMI: 36.8","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.245<br> BMI: 26.2","Diabetes Outcome:Non-diabetic<br> Diabetes Pedigree Function: 0.315<br> BMI: 30.4"],"type":"scatter","name":"Non-diabetic","marker":{"color":"rgba(55,126,184,1)","line":{"color":"rgba(55,126,184,1)"}},"textfont":{"color":"rgba(55,126,184,1)"},"error_y":{"color":"rgba(55,126,184,1)"},"error_x":{"color":"rgba(55,126,184,1)"},"line":{"color":"rgba(55,126,184,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<div id="prediction-model" class="section level2">
+<h2>Prediction Model</h2>
+<ul>
+<li>Based on th analysis above, I built a prediction model. The final training model concluded with around 80% Accuracy, which indicates good prediction ability of the model. Along with the good accuracy value, 66.7% Sensitivity, 88.3% Specificity, 76.7% Positive Prediction Value, and 82.0% Negative Prediction Value was obtained from the model.</li>
+</ul>
+<pre><code>## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  768 
+## 
+##  
+##           |         0 |         1 | 
+##           |-----------|-----------|
+##           |       500 |       268 | 
+##           |     0.651 |     0.349 | 
+##           |-----------|-----------|
+## 
+## 
+## 
+## </code></pre>
+<pre><code>## 
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   1   0
+##          1  42  18
+##          0  33 147
+## 
+##                 Total n : 240
+##                Accuracy : 0.7875
+##                  95% CI : (0.7314, 0.8345)
+##     No Information Rate : 0.6875
+##     P-Value [Acc &gt; NIR] : 3.65e-04
+## 
+##                   Kappa : 0.4769
+##  Mcnemar&#39;s Test P-Value : 0.0499
+## 
+##             Sensitivity : 0.5600
+##             Specificity : 0.8909
+##          Pos Pred Value : 0.7000
+##          Neg Pred Value : 0.8167
+##              Prevalence : 0.3125
+##          Detection Rate : 0.2500
+##    Detection Prevalence : 0.1750
+##       Balanced Accuracy : 0.7255
+##          F-val Accuracy : 0.6222
+##      Matthews Cor.-Coef : 0.4827
+## 
+##        &#39;Positive&#39; Class : 1</code></pre>
+</div>
 </div>
 <div id="conclusion" class="section level1">
 <h1>Conclusion</h1>
@@ -794,7 +874,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

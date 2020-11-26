@@ -1,10 +1,12 @@
 ---
-title: "PM566 Final Project"
+title: 'PM566 Final Project: Diabetes Prediction'
 author: "Jun Lee"
-output: 
-    html_document:
-        toc: TRUE
-        toc_float: TRUE
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
 
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
@@ -50,7 +52,7 @@ Diabetes is a complex metabolic syndrome and its involvement in various diseases
 
 Analyzing diabetes is beneficial as it could help prevent tragedic illnesses such as sudden cardiac death, the leading cause of death in the United States. The object of this study is to find out if diabetes risk prediction is possible based on family history and genetic factors along with other risk factors. 
 
-This study is focused on whether Diabetes Pedigree Function is truly associated with diabetes and if so, what risk factors have a significant relationship with it. The association between Diabetes Pedigree Function and disease status would reveal to what extent does the genetic factors affect diabetes. The dataset did not separate type 1 diabetes and type 2 diabetes. Regardless of the type of diabetes, however, the dataset has sufficient predictors to evaluate the hypothesis because both types of diabetes are caused by impaired glucose metabolism. Diabetes Pedigree Function, which is the key variable, can be assessed as family history is one of the important risk factors for both types of diabetes. In the analysis, important indicators of diabetes will be evaluated together.
+This study is focused on 1) whether Diabetes Pedigree Function is truly associated with diabetes and if so, what risk factors have a significant relationship with it. 2) Creating effective diabetes prediction model. The association between Diabetes Pedigree Function and disease status would reveal to what extent does the genetic factors affect diabetes. The dataset did not separate type 1 diabetes and type 2 diabetes. Regardless of the type of diabetes, however, the dataset has sufficient predictors to evaluate the hypothesis because both types of diabetes are caused by impaired glucose metabolism. Diabetes Pedigree Function, which is the key variable, can be assessed as family history is one of the important risk factors for both types of diabetes. In the analysis, important indicators of diabetes will be evaluated together.
 
 <br> 
 
@@ -97,31 +99,6 @@ diabetes <- read_csv("data/diabetes.csv")
 ```
 
 
-## Exploratory Data Analysis
-
-- The total dataset includes 768 observations with 9 vaiables. 
-
-- Lipotoxicity is right skewed and ranged from 0 to 17 with mean of 3.85. 
-
-- Glucose level is not skewed to either side and ranged from 0 to 199 with mean of 121. 
-
-- Blood Pressure is also not skewed and ranged from 0 to 122 with mean of 69.1. 
-
-- Skin Thickness right skewed and ranged from 0 to 99. 
-
-- Insulin level is extremly right skewed and ranged from 0 to 846. 
-
-- BMI is fairly normally distributed and ranged from 0 to 67.1. 
-
-- Diabetes Pedigree Function is right skewed and ranged from 0.078 to 2.42.
-
-- Age is right skewed and ranged from 21 to 81. Right skewed age data displays more than 50% of observations are in the age group of 20 to 29. This data is more focused on young population.
-
-- Outcome has binary results with mean of 0.349 which means 34.9% of all observations have diabetes positive outcome.
-
-```{r}
-skim(diabetes)
-```
 
 ## Data Cleaning
 
@@ -167,6 +144,9 @@ db$age_group <- ifelse(db$age < 30, "20-29",
 
 ```
 
+```{r}
+skim(db)
+```
 
 <br>
 
@@ -221,7 +201,7 @@ db_table <-
     Age=mean(age, na.rm = TRUE),
     )
 
-knitr::kable(db_table, align= "c", digits = 4, caption = "Mean of Each Risk Factors by Outcome Group")
+knitr::kable(db_table, align= "c", digits = 2, caption = "Mean of Each Risk Factors by Outcome Group")
 ```
 <br>
 
@@ -382,6 +362,48 @@ db_ot %>%
   layout(title = "BMI vs Diabetes Pedigree Function by oucome",
                   yaxis = list(title = "BMI"), xaxis = list(title = "Diabetes Pedigree Function"),
          hovermode = "compare")
+```
+
+## Prediction Model
+
+- Based on th analysis above, I built a prediction model. The final training model concluded with around 80% Accuracy, which indicates good prediction ability of the model. Along with the good accuracy value, 66.7% Sensitivity, 88.3% Specificity, 76.7% Positive Prediction Value, and 82.0% Negative Prediction Value was obtained from the model.
+
+
+```{r}
+library(mfp)
+library(ROCit)
+library(interactions)
+source("plot_resid_lev_logistic.R")
+source("logit_plot.R")
+source("group_smooth.R")
+```
+
+```{r}
+with(db,
+     gmodels::CrossTable(outcome))
+
+db_pred <-
+db %>%
+  mutate(training = sample(0:1, nrow(.),prob=c(.3, .7), replace=T))
+
+db_train <- db_pred %>% filter(training == 1)
+db_test  <- db_pred %>% filter(training == 0)
+
+```
+
+```{r}
+final_model <- glm(outcome ~ dpf + lip + glu + ins + bmi + ins*dpf, family=binomial, data=db_train) 
+```
+
+```{r}
+DescTools::Conf(final_model, pos = 1)
+```
+
+```{r eval=FALSE}
+# Extend to the testing data set
+final_model_test <- glm(outcome ~ dpf + lip + glu + ins + bmi + age + ins*dpf, family=binomial, data=db_test) 
+
+DescTools::Conf(final_model_test, pos = 1)
 ```
 
 # Conclusion

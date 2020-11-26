@@ -257,3 +257,4 @@ ggplotly(p_glu)
 p_ins <- ggplot(db, aes(x=dpf, y=ins)) + geom_point() + geom_smooth () 
 ggplotly(p_ins)
 ```
+
