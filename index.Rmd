@@ -2,11 +2,11 @@
 title: 'PM566 Final Project: Diabetes Prediction'
 author: "Jun Lee"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     toc: yes
     toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
