@@ -366,7 +366,7 @@ db_ot %>%
 
 ## Prediction Model
 
-- Based on th analysis above, I built a prediction model. The final training model concluded with around 80% Accuracy, which indicates good prediction ability of the model. Along with the good accuracy value, 66.7% Sensitivity, 88.3% Specificity, 76.7% Positive Prediction Value, and 82.0% Negative Prediction Value was obtained from the model.
+- Based on th analysis above, prediction model was built including DPF, lipotoxicity, glucose level, insulin levle, BMI, and age as predictors. The final training model concluded with around 80% Accuracy, which indicates good prediction ability of the model. Along with the good accuracy value, around 60% Sensitivity, 90% Specificity, 70% Positive Prediction Value, and 80% Negative Prediction Value was obtained from the model.
 
 
 ```{r}
@@ -392,7 +392,7 @@ db_test  <- db_pred %>% filter(training == 0)
 ```
 
 ```{r}
-final_model <- glm(outcome ~ dpf + lip + glu + ins + bmi + ins*dpf, family=binomial, data=db_train) 
+final_model <- glm(outcome ~ dpf + lip + glu + ins + bmi + age + ins*dpf, family=binomial, data=db_train) 
 ```
 
 ```{r}

@@ -57,7 +57,6 @@ Analyzing diabetes is beneficial as it could help prevent tragedic illnesses suc
 
 This study is focused on 1) whether Diabetes Pedigree Function is truly associated with diabetes and if so, what risk factors have a significant relationship with it. 2) Creating effective diabetes prediction model. The association between Diabetes Pedigree Function and disease status would reveal to what extent does the genetic factors affect diabetes. The dataset did not separate type 1 diabetes and type 2 diabetes. Regardless of the type of diabetes, however, the dataset has sufficient predictors to evaluate the hypothesis because both types of diabetes are caused by impaired glucose metabolism. Diabetes Pedigree Function, which is the key variable, can be assessed as family history is one of the important risk factors for both types of diabetes. In the analysis, important indicators of diabetes will be evaluated together.
 
-<br> 
 
 ## Data description
 
@@ -93,9 +92,7 @@ The dataset used in this study was acquired from Harvard Dataverse. Among severa
 
 Reference: P. Rodgers, Judith, 2020, "Diabetes Mellitus “Comorbidity” or an Important Risk Factor?", https://doi.org/10.7910/DVN/JAW6AX, Harvard Dataverse, V2, UNF:6:QOwrJ53n2F5fMC+wb4ADVA== [fileUNF]
 
-Analysis through assessing various plots, tables and graphs was performed to identify association between Diabetes Pedigree Function and diabetes test outcome, including the examination of the effect of lipotoxicity, glucose level, blood pressure, skin thickness, insulin level, BMI, and age. The data was cleaned by replacing extreme values to 'NA's, shortening variable names, and creating new factor variable for better analysis. Skim function from skimr package was used to explore data. Dim, head and tail, summary, and table functions were used to check detailed observations. Age was stratified into four age groups(20-29, 30-39, 40-49, and 50+) for better understanding of relationship with diabetes. Outcome was binomial variable(0, 1) and it was transformed into factor variable (Non-diabetic and Diabetic).
-
-<br>
+Analysis through assessing various plots, tables and graphs was performed to identify association between Diabetes Pedigree Function and diabetes test outcome, including the examination of the effect of lipotoxicity, glucose level, blood pressure, skin thickness, insulin level, BMI, and age. The data was cleaned by replacing extreme values to 'NA's, shortening variable names, and creating new factor variable for better analysis. Skim function from skimr package was used to explore data. Dim, head and tail, summary, and table functions were used to check detailed observations. Age was stratified into four age groups(20-29, 30-39, 40-49, and 50+) for better understanding of relationship with diabetes. Outcome was binomial variable(0, 1) and it was transformed into factor variable (Non-diabetic and Diabetic). For prediction model, logistic regression was performed with grouped smooth method and LOESS smoothing method conducted for linearity assumption evaluation. Influential outliers and model fit was checked and the statistics including accuracy, sensitivity, and specificity were displayed with graphs. ROC curve and area under the curve was measured for the discrimination ability of the model.
 
 ```{r}
 diabetes <- read_csv("data/diabetes.csv")
@@ -175,8 +172,6 @@ db$age_group <- ifelse(db$age < 30, "20-29",
 <br>
 
 # Results
-
-<br>
 
 ## Histogram of Diabetes outcome by age groups
 
@@ -511,22 +506,17 @@ summary(best_subset_outcome_prelim)
 ```
 
 ```{r, eval=FALSE}
-best_outcome_model0 <- glm(outcome ~ dpf + lip + glu + ins + bmi + age, family=binomial, data=db_train) 
-summary(best_outcome_model0)
-
 subset_outcome_prelim2 <-
   glmulti::glmulti(outcome ~ dpf + lip + glu + ins + bmi, 
           data = db_train,
           level=2, family = binomial, crit="aicc", confsetsize=128)
-
-summary(subset_outcome_prelim2)
 
 best_subset_outcome_prelim2 <- 
   summary(subset_outcome_prelim2)$bestmodel %>% glm(., data = db_train, family = binomial)
 
 summary(best_subset_outcome_prelim2)
 
-best_outcome_model <- glm(outcome ~ dpf + lip + glu + ins + bmi + ins*dpf, family=binomial, data=db_train) 
+best_outcome_model <- glm(outcome ~ dpf + lip + glu + ins + bmi + ins*dpf + ins*lip + dpf*bmi, family=binomial, data=db_train) 
 summary(best_outcome_model)
 
 sim_slopes(best_outcome_model, pred = ins, modx = dpf, johnson_neyman = FALSE)
@@ -562,7 +552,6 @@ ResourceSelection::hoslem.test(final_model$y, fitted(final_model), g=20)
 library(LogisticDx)
 
 plot_resid_lev_logistic(final_model)
-LogisticDx::dx(final_model)
 ```
 
 ```{r}
@@ -598,14 +587,6 @@ tibble(
   ggplot(aes(x = Cutoff, y = value, color = metric)) +
   geom_point() + 
   geom_line()
-
-tibble(
-  Cutoff = final_model.roc$Cutoff,
-  SENS = final_model.roc$SENS,
-  SPEC = final_model.roc$SPEC,
-  SUM = SENS + SPEC
-) %>%
-  arrange(-SUM, -SENS, -SPEC)
   
 roc_empirical <- 
   rocit(score = final_model$fitted.values, class = final_model$y)

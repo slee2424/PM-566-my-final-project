@@ -331,7 +331,6 @@ $(document).ready(function () {
 <p>Diabetes is a complex metabolic syndrome and its involvement in various diseases is manifold with varying manifestations and different clinical symptoms and prognosis. Although being probably the most important risk factor, diabetes is often considered an “accompanying comorbidity” for cardiac or peripheral artery disease, hypertension, or stroke. An interesting study demonstrated that the risk of sudden cardiac death is at least 2-times higher in patients who are diabetic compared with those who are nondiabetic, regardless of the extent of cardiac dysfunction or symptoms of heart failure. In contrast, the risk of nonsudden cardiac death was not signiﬁcantly different between the 2 groups.</p>
 <p>Analyzing diabetes is beneficial as it could help prevent tragedic illnesses such as sudden cardiac death, the leading cause of death in the United States. The object of this study is to find out if diabetes risk prediction is possible based on family history and genetic factors along with other risk factors.</p>
 <p>This study is focused on 1) whether Diabetes Pedigree Function is truly associated with diabetes and if so, what risk factors have a significant relationship with it. 2) Creating effective diabetes prediction model. The association between Diabetes Pedigree Function and disease status would reveal to what extent does the genetic factors affect diabetes. The dataset did not separate type 1 diabetes and type 2 diabetes. Regardless of the type of diabetes, however, the dataset has sufficient predictors to evaluate the hypothesis because both types of diabetes are caused by impaired glucose metabolism. Diabetes Pedigree Function, which is the key variable, can be assessed as family history is one of the important risk factors for both types of diabetes. In the analysis, important indicators of diabetes will be evaluated together.</p>
-<p><br></p>
 <div id="data-description" class="section level2">
 <h2>Data description</h2>
 <ul>
@@ -356,8 +355,7 @@ $(document).ready(function () {
 <h1>Methods</h1>
 <p>The dataset used in this study was acquired from Harvard Dataverse. Among several predictors, Diabetes Pedigree Function was a particularly interesting attribute in the dataset. It provided some data on diabetes history in relatives and the genetic relationship of those relatives to the patient. This measure of genetic influence became the starting point of an idea that the hereditary risk could be used for the risk stratification or prediction of onset of diabetes.</p>
 <p>Reference: P. Rodgers, Judith, 2020, “Diabetes Mellitus “Comorbidity” or an Important Risk Factor?", <a href="https://doi.org/10.7910/DVN/JAW6AX" class="uri">https://doi.org/10.7910/DVN/JAW6AX</a>, Harvard Dataverse, V2, UNF:6:QOwrJ53n2F5fMC+wb4ADVA== [fileUNF]</p>
-<p>Analysis through assessing various plots, tables and graphs was performed to identify association between Diabetes Pedigree Function and diabetes test outcome, including the examination of the effect of lipotoxicity, glucose level, blood pressure, skin thickness, insulin level, BMI, and age. The data was cleaned by replacing extreme values to ’NA’s, shortening variable names, and creating new factor variable for better analysis. Skim function from skimr package was used to explore data. Dim, head and tail, summary, and table functions were used to check detailed observations. Age was stratified into four age groups(20-29, 30-39, 40-49, and 50+) for better understanding of relationship with diabetes. Outcome was binomial variable(0, 1) and it was transformed into factor variable (Non-diabetic and Diabetic).</p>
-<p><br></p>
+<p>Analysis through assessing various plots, tables and graphs was performed to identify association between Diabetes Pedigree Function and diabetes test outcome, including the examination of the effect of lipotoxicity, glucose level, blood pressure, skin thickness, insulin level, BMI, and age. The data was cleaned by replacing extreme values to ’NA’s, shortening variable names, and creating new factor variable for better analysis. Skim function from skimr package was used to explore data. Dim, head and tail, summary, and table functions were used to check detailed observations. Age was stratified into four age groups(20-29, 30-39, 40-49, and 50+) for better understanding of relationship with diabetes. Outcome was binomial variable(0, 1) and it was transformed into factor variable (Non-diabetic and Diabetic). For prediction model, logistic regression was performed with grouped smooth method and LOESS smoothing method conducted for linearity assumption evaluation. Influential outliers and model fit was checked and the statistics including accuracy, sensitivity, and specificity were displayed with graphs. ROC curve and area under the curve was measured for the discrimination ability of the model.</p>
 <div id="exploratory-data-analysis" class="section level2">
 <h2>Exploratory Data Analysis</h2>
 <ul>
@@ -559,7 +557,6 @@ $(document).ready(function () {
 </div>
 <div id="results" class="section level1">
 <h1>Results</h1>
-<p><br></p>
 <div id="histogram-of-diabetes-outcome-by-age-groups" class="section level2">
 <h2>Histogram of Diabetes outcome by age groups</h2>
 <ul>
@@ -1307,42 +1304,6 @@ $(document).ready(function () {
 ## data:  final_model$y, fitted(final_model)
 ## X-squared = 11.577, df = 18, p-value = 0.8683</code></pre>
 <p><img src="Final_project_files/figure-html/unnamed-chunk-29-1.png" width="700px" style="display: block; margin: auto;" /></p>
-<pre><code>##      (Intercept)   dpf lip glu ins  bmi age dpf:ins y           P n        yhat
-##   1:           1 0.257   2  68  15 20.1  23   3.855 0 0.002888198 1 0.002888198
-##   2:           1 0.332   2  56  45 24.2  22  14.940 0 0.003540391 1 0.003540391
-##   3:           1 0.187   2  68  66 25.0  25  12.342 0 0.004583480 1 0.004583480
-##   4:           1 0.283   1  81  40 26.6  24  11.320 0 0.009113989 1 0.009113989
-##   5:           1 0.293   3  74  45 29.7  23  13.185 0 0.010388127 1 0.010388127
-##  ---                                                                           
-## 230:           1 0.233   1  95 180 35.0  43  41.940 1 0.096098035 1 0.096098035
-## 231:           1 2.137   3 173 465 38.4  25 993.705 1 0.656332834 1 0.656332834
-## 232:           1 0.880   3 123 240 57.3  22 211.200 0 0.734196485 1 0.734196485
-## 233:           1 1.174  13 153 140 40.6  39 164.360 0 0.956763279 1 0.956763279
-## 234:           1 0.460   9 134  60 25.9  81  27.600 0 0.717816709 1 0.717816709
-##               Pr          dr           h         sPr         sdr       dChisq
-##   1: -0.05381974 -0.07605757 0.001765392 -0.05386731 -0.07612480  0.002901687
-##   2: -0.05960679 -0.08422200 0.001924679 -0.05966424 -0.08430317  0.003559821
-##   3: -0.06785709 -0.09585423 0.002285267 -0.06793476 -0.09596394  0.004615132
-##   4: -0.09590525 -0.13532018 0.003349512 -0.09606628 -0.13554738  0.009228729
-##   5: -0.10245571 -0.14451616 0.003576653 -0.10263943 -0.14477530  0.010534852
-##  ---                                                                         
-## 230:  3.06692682  2.16443361 0.034903160  3.12189265  2.20322485  9.746213743
-## 231:  0.72361399  0.91770066 0.347931607  0.89610805  1.13646082  0.803009644
-## 232: -1.66197999 -1.62788077 0.123308654 -1.77501665 -1.73859823  3.150684097
-## 233: -4.70409270 -2.50641781 0.029366528 -4.77472364 -2.54405113 22.797985847
-## 234: -1.59492819 -1.59072213 0.183417273 -1.76498509 -1.76033056  3.115172359
-##             dDev        dBhat
-##   1: 0.005794985 5.131674e-06
-##   2: 0.007107024 6.864727e-06
-##   3: 0.009209078 1.057097e-05
-##   4: 0.018373091 3.101562e-05
-##   5: 0.020959886 3.781476e-05
-##  ---                         
-## 230: 4.854199739 3.524762e-01
-## 231: 1.291543202 4.284711e-01
-## 232: 3.022723820 4.431510e-01
-## 233: 6.472196151 6.897533e-01
-## 234: 3.098763690 6.997165e-01</code></pre>
 <pre><code>## 
 ## Confusion Matrix and Statistics
 ## 
@@ -1372,22 +1333,7 @@ $(document).ready(function () {
 ##      Matthews Cor.-Coef : 0.5375
 ## 
 ##        &#39;Positive&#39; Class : 1</code></pre>
-<p><img src="Final_project_files/figure-html/unnamed-chunk-30-1.png" width="700px" style="display: block; margin: auto;" /><img src="Final_project_files/figure-html/unnamed-chunk-30-2.png" width="700px" style="display: block; margin: auto;" /></p>
-<pre><code>## # A tibble: 235 x 4
-##    Cutoff  SENS  SPEC   SUM
-##     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  0.218 0.889 0.685  1.57
-##  2  0.226 0.875 0.698  1.57
-##  3  0.211 0.889 0.679  1.57
-##  4  0.225 0.875 0.691  1.57
-##  5  0.236 0.861 0.704  1.56
-##  6  0.295 0.806 0.759  1.56
-##  7  0.241 0.847 0.716  1.56
-##  8  0.319 0.778 0.784  1.56
-##  9  0.208 0.889 0.673  1.56
-## 10  0.176 0.931 0.630  1.56
-## # ... with 225 more rows</code></pre>
-<p><img src="Final_project_files/figure-html/unnamed-chunk-30-3.png" width="700px" style="display: block; margin: auto;" /></p>
+<p><img src="Final_project_files/figure-html/unnamed-chunk-30-1.png" width="700px" style="display: block; margin: auto;" /><img src="Final_project_files/figure-html/unnamed-chunk-30-2.png" width="700px" style="display: block; margin: auto;" /><img src="Final_project_files/figure-html/unnamed-chunk-30-3.png" width="700px" style="display: block; margin: auto;" /></p>
 <pre><code>##                            
 ##  Method used: empirical    
 ##  Number of positive(s): 72 
